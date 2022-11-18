@@ -2,10 +2,10 @@
   font-size: 14px;
   line-height: 1.2;
   text-align: left;
-  width: calc(104ch);
+  width: 104ch;
   margin: auto;
 }
-#editordiv .cloze {
+#editordiv .cloze-hint {
   position: fixed;
   right: 0;
   margin: 0;
