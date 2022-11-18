@@ -53,7 +53,8 @@ function addHintIde() {
   $(".cloze-hint[data-pos=post]").css({
     bottom: bottomOffset,
   });
-  function adjustEditor() {
+  async function adjustEditor() {
+    await new Promise((resolve) => setTimeout(resolve, 10));
     $(".cloze-hint").css("left", $("#editor").css("left"));
     $("#editor").css({
       top: $(".cloze-hint[data-pos=pre]").height() + 44,
@@ -61,7 +62,7 @@ function addHintIde() {
       bottom: $(".cloze-hint[data-pos=post]").height() + bottomOffset,
     });
   }
-  adjustEditor();
+  setTimeout(adjustEditor, 10);
   $("window").resize(adjustEditor);
   $("#btnHoverDescription,#btnShowProblem").click(adjustEditor);
 }
