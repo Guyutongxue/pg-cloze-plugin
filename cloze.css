@@ -13,3 +13,21 @@
   border-radius: unset;
   font-size: 14px;
 }
+app-pre,
+app-post {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  display: block;
+  white-space: pre;
+  background-color: #eee;
+}
+app-post {
+  margin-top: -2em;
+}
+app-post::before {
+  content: "// 请在这里补充代码";
+  background-color: white;
+  color: darkgreen;
+  display: block;
+  font-weight: bold;
+}
