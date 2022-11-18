@@ -20,6 +20,7 @@ app-post {
   display: block;
   white-space: pre;
   background-color: #eee;
+  text-indent: 0;
 }
 app-post {
   margin-top: -2em;

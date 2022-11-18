@@ -65,6 +65,7 @@ function addHintIde() {
   setTimeout(adjustEditor, 100);
   $(window).resize(adjustEditor);
   $("#btnHoverDescription,#btnShowProblem").click(adjustEditor);
+  console.log("Added cloze hint for ide.");
 }
 if (location.pathname.includes("ide.do")) {
   replaceClickHandler("#btnTest", "testCode", submitIdeWithSnippet);
