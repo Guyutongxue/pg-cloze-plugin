@@ -60,6 +60,7 @@ function addHintIde() {
       height: "unset",
       bottom: $(".cloze-hint[data-pos=post]").height() + 19 + bottomOffset,
     });
+    editor.resize();
   }
   setTimeout(adjustEditor, 100);
   $(window).resize(adjustEditor);
