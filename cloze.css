@@ -13,6 +13,8 @@
   border-radius: unset;
   font-size: 14px;
   max-height: 30%;
+  width: unset;
+  padding-left: 50px;
 }
 app-pre,
 app-post {

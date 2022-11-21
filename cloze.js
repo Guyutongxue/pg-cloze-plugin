@@ -78,6 +78,9 @@ function replaceSolutionLoaded() {
       originalOnSolutionLoaded();
     }
   }
+  if (location.search.includes("solutionId")) {
+    onSolutionLoaded();
+  }
 }
 if (location.pathname.includes("ide.do")) {
   replaceClickHandler("#btnTest", "testCode", submitIdeWithSnippet);
