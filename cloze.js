@@ -18,9 +18,9 @@ function submitIdeWithSnippet(originalHandler) {
   const origin = editor.getValue();
   const pre = getText("app-pre");
   const post = getText("app-post");
-  editor.setValue(pre + origin + post);
+  editor.setValue(pre + origin + post, -1);
   originalHandler();
-  editor.setValue(origin);
+  editor.setValue(origin, -1);
 }
 async function replaceClickHandler(selector, handler_name, replacement) {
   while (true) {
@@ -49,7 +49,6 @@ function addHintIde() {
   const toolbarTop = $("#editor_toolbar").css("top");
   const toolbarTopNum = Number(toolbarTop.substring(0, toolbarTop.length - 2));
   const bottomOffset = $(window).height() - toolbarTopNum;
-  console.log(bottomOffset);
   $(".cloze-hint[data-pos=post]").css({
     bottom: bottomOffset,
   });
@@ -59,7 +58,7 @@ function addHintIde() {
     $("#editor").css({
       top: $(".cloze-hint[data-pos=pre]").height() + 44,
       height: "unset",
-      bottom: $(".cloze-hint[data-pos=post]").height() + bottomOffset,
+      bottom: $(".cloze-hint[data-pos=post]").height() + 19 + bottomOffset,
     });
   }
   setTimeout(adjustEditor, 100);
@@ -67,10 +66,23 @@ function addHintIde() {
   $("#btnHoverDescription,#btnShowProblem").click(adjustEditor);
   console.log("Added cloze hint for ide.");
 }
+function replaceSolutionLoaded() {
+  const originalOnSolutionLoaded = onSolutionLoaded;
+  window.onSolutionLoaded = () => {
+    const sourceCode = solution.sourceCode;
+    const pre = getText("app-pre");
+    const post = getText("app-post");
+    if (sourceCode.startsWith(pre) && sourceCode.endsWith(post)) {
+      solution.sourceCode = sourceCode.substring(pre.length, sourceCode.length - post.length);
+      originalOnSolutionLoaded();
+    }
+  }
+}
 if (location.pathname.includes("ide.do")) {
   replaceClickHandler("#btnTest", "testCode", submitIdeWithSnippet);
   replaceClickHandler("#btnSubmit", "submitCode", submitIdeWithSnippet);
   addHintIde();
+  replaceSolutionLoaded();
 } else {
   replaceClickHandler("#sourceCode_submit", "do_submit", submitWithSnippet);
   addHint("#sourceCode");
